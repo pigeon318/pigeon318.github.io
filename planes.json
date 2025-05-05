@@ -1,0 +1,47 @@
+[
+  {
+    "registration": "G-BOAC",
+    "aircraft": "Concorde",
+    "livery": "British Airways",
+    "airline": "British Airways",
+    "operator": "British Airways",
+    "status": "Retired",
+    "in_service": false,
+    "country": "United Kingdom",
+    "age": 51
+  },
+  {
+    "registration": "N12345",
+    "aircraft": "Boeing 737",
+    "livery": "Southwest Classic",
+    "airline": "Southwest Airlines",
+    "operator": "Southwest Airlines",
+    "status": "Active",
+    "in_service": true,
+    "country": "United States",
+    "age": 8
+  },
+  {
+    "registration": "TC-SPK",
+    "aircraft": "Boeing 737-86N",
+    "livery": "Sun Express",
+    "airline": "Sun Express",
+    "operator": "Sun Express",
+    "status": "Active",
+    "in_service": true,
+    "country": "Turkey",
+    "age": 11
+  },
+  {
+    "registration": "G-IACY",
+    "aircraft": "ATR 72-600",
+    "livery": "Eastern Airways",
+    "airline": "Eastern Airways",
+    "operator": "Eastern airways",
+    "status": "In service",
+    "in_service": true,
+    "country": "United Kingdom",
+    "age": 7
+  }
+]
+   
