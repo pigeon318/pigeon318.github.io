@@ -22,6 +22,17 @@
     "age": 9
   },
   {
+    "registration": "PH-EXV",
+    "aircraft": "Embraer E190STD",
+    "livery": "KLM",
+    "airline": "KLM",
+    "operator": "KLM City Hopper",
+    "status": "Active",
+    "in_service": true,
+    "country": "Netherlands",
+    "age": 7
+  },
+  {
     "registration": "G-JZHL",
     "aircraft": "Boeing 737-8MG ",
     "livery": "Jet 2 holidays",
