@@ -2,8 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plane Registration Lookup</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #00247d, #ffffff, #cf142b);
+      color: #333;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ffffff;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #004b87;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #003366;
+    }
+
+    #result {
+      margin-top: 20px;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    #regCount {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
   <h1>Plane Registration Lookup</h1>
@@ -15,18 +72,32 @@
   <p id="regCount">Loading registrations...</p>
 
   <script>
-    let planes = [];
+    const planes = [
+      {
+        "registration": "G-BOAC",
+        "aircraft": "Boeing 747-400",
+        "livery": "British Airways",
+        "airline": "British Airways",
+        "operator": "British Airways",
+        "status": "Retired",
+        "in_service": false,
+        "country": "United Kingdom",
+        "age": 30
+      },
+      {
+        "registration": "N12345",
+        "aircraft": "Airbus A320",
+        "livery": "American Airlines",
+        "airline": "American Airlines",
+        "operator": "American Airlines",
+        "status": "Active",
+        "in_service": true,
+        "country": "USA",
+        "age": 10
+      }
+    ];
 
-    fetch('planes.json')
-      .then(response => response.json())
-      .then(data => {
-        planes = data;
-        document.getElementById("regCount").textContent = `Registrations supported: ${planes.length}`;
-      })
-      .catch(error => {
-        console.error("Error loading planes.json:", error);
-        document.getElementById("regCount").textContent = "Failed to load registrations.";
-      });
+    document.getElementById("regCount").textContent = `Registrations supported: ${planes.length}`;
 
     function searchPlane() {
       const input = document.getElementById("regInput").value.trim().toUpperCase();
