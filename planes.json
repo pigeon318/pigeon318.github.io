@@ -22,6 +22,28 @@
     "age": 9
   },
   {
+    "registration": "G-JZHL",
+    "aircraft": "Boeing 737-8MG ",
+    "livery": "Jet 2 holidays",
+    "airline": "Jet2",
+    "operator": "Jet 2",
+    "status": "Active",
+    "in_service": true,
+    "country": "United kingdom",
+    "age": 8
+  },
+  {
+    "registration": "G-FDZX",
+    "aircraft": "Boeing 737-8K5",
+    "livery": "TUI",
+    "airline":  "TUI",
+    "operator": "TUI Airways",
+    "status": "Active",
+    "in_service": true,
+    "country": "United States",
+    "age": 8
+  },
+  {
     "registration": "A6-EEN",
     "aircraft": "Airbus A380-861",
     "livery": "Emirates",
