@@ -22,6 +22,17 @@
     "age": 8
   },
   {
+    "registration": "ZP808",
+    "aircraft": "Boeing Poseidon MRA1 (Boeing 737)",
+    "livery": "Royal Air Force",
+    "airline": "Royal Air Force",
+    "operator": "Royal Air Force",
+    "status": "Active",
+    "in_service": true,
+    "country": "United Kingdom",
+    "age": 3
+  },
+  {
     "registration": "TC-SPK",
     "aircraft": "Boeing 737-86N",
     "livery": "Sun Express",
