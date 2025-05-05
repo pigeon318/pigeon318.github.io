@@ -2,45 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Plane Identifier</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-    }
-    input {
-      padding: 8px;
-      font-size: 16px;
-      width: 70%;
-      margin-right: 10px;
-    }
-    button {
-      padding: 8px 12px;
-      font-size: 16px;
-    }
-    #result {
-      margin-top: 20px;
-    }
-    #result h2 {
-      margin-bottom: 10px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 6px;
-    }
-    .not-found {
-      color: red;
-      font-weight: bold;
-    }
-  </style>
+  <title>Plane Registration Lookup</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>Plane Registration Lookup</h1>
+
   <input type="text" id="regInput" placeholder="e.g. G-BOAC" />
   <button onclick="searchPlane()">Search</button>
 
@@ -50,39 +17,38 @@
   <script>
     let planes = [];
 
-    // Load plane database
     fetch('planes.json')
-      .then(res => res.json())
+      .then(response => response.json())
       .then(data => {
         planes = data;
-        document.getElementById("regCount").textContent = 
-          `Registrations supported: ${planes.length}`;
+        document.getElementById("regCount").textContent = `Registrations supported: ${planes.length}`;
       })
-      .catch(err => {
-        console.error("Failed to load planes.json", err);
+      .catch(error => {
+        console.error("Error loading planes.json:", error);
         document.getElementById("regCount").textContent = "Failed to load registrations.";
       });
 
     function searchPlane() {
       const input = document.getElementById("regInput").value.trim().toUpperCase();
-      const match = planes.find(p => p.registration === input);
+      const result = planes.find(p => p.registration === input);
       const resultDiv = document.getElementById("result");
 
-      if (match) {
+      if (result) {
         resultDiv.innerHTML = `
-          <h2>${match.registration}</h2>
+          <h2>${result.registration}</h2>
           <ul>
-            <li><strong>Aircraft:</strong> ${match.aircraft}</li>
-            <li><strong>Livery:</strong> ${match.livery}</li>
-            <li><strong>Airline:</strong> ${match.airline}</li>
-            <li><strong>Status:</strong> ${match.status}</li>
-            <li><strong>In Service:</strong> ${match.in_service ? "Yes" : "No"}</li>
-            <li><strong>Country:</strong> ${match.country}</li>
-            <li><strong>Age:</strong> ${match.age} years</li>
+            <li><strong>Aircraft:</strong> ${result.aircraft}</li>
+            <li><strong>Livery:</strong> ${result.livery}</li>
+            <li><strong>Airline:</strong> ${result.airline}</li>
+            <li><strong>Operator:</strong> ${result.operator}</li>
+            <li><strong>Status:</strong> ${result.status}</li>
+            <li><strong>In Service:</strong> ${result.in_service ? "Yes" : "No"}</li>
+            <li><strong>Country:</strong> ${result.country}</li>
+            <li><strong>Age:</strong> ${result.age} years</li>
           </ul>
         `;
       } else {
-        resultDiv.innerHTML = `<p class="not-found">Plane not found.</p>`;
+        resultDiv.innerHTML = `<p style="color: red;">Plane not found.</p>`;
       }
     }
   </script>
