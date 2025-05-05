@@ -11,6 +11,28 @@
     "age": 51
   },
   {
+    "registration": "QTR73B",
+    "aircraft": "Boeing 787-8",
+    "livery": "25 Years of Excellence",
+    "airline": "Qatar Airways",
+    "operator": "Qatar Airways",
+    "status": "Active",
+    "in_service": true,
+    "country": "Qatar",
+    "age": 9
+  },
+  {
+    "registration": "A6-EEN",
+    "aircraft": "Airbus A380-861",
+    "livery": "Emirates",
+    "airline": "Emirates",
+    "operator": "Emirates",
+    "status": "Active",
+    "in_service": true,
+    "country": "United Arab Emirates",
+    "age": 11
+  },
+  {
     "registration": "N12345",
     "aircraft": "Boeing 737",
     "livery": "Southwest Classic",
