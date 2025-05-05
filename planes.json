@@ -11,6 +11,17 @@
     "age": 51
   },
   {
+    "registration": "G-DRTW",
+    "aircraft": "Boeing 737-86N",
+    "livery": "Jet2",
+    "airline": "Jet2",
+    "operator": "Jet2",
+    "status": "Active",
+    "in_service": true,
+    "country": "United Kingdom",
+    "age": 25
+  },
+  {
     "registration": "QTR73B",
     "aircraft": "Boeing 787-8",
     "livery": "25 Years of Excellence",
