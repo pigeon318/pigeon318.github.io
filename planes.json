@@ -11,6 +11,17 @@
     "age": 51
   },
   {
+    "registration": "G-TTNM",
+    "aircraft": "Airbus A320-251N",
+    "livery": "British Airways",
+    "airline": "British Airways ",
+    "operator": "British Airways",
+    "status": "Active",
+    "in_service": true,
+    "country": "United Kingdom",
+    "age": 4
+  },
+  {
     "registration": "G-DRTW",
     "aircraft": "Boeing 737-86N",
     "livery": "Jet2",
