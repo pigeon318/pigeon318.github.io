@@ -12,6 +12,49 @@
   },
   
   {
+    "registration": "YR-BAC",
+    "aircraft": "B737-300",
+    "livery": "Blue Air",
+    "airline": "Blue Air",
+    "operator": "Airwork Flight Operations Ltd",
+    "status": "Active",
+    "in_service": true,
+    "country": "Romania",
+    "age": 31
+  },
+  {
+    "registration": "TC-OCE",
+    "aircraft": "A330-200",
+    "livery": "Onur Air",
+    "airline": "Onur Air",
+    "operator": "CLJ Avenue Limited",
+    "status": "Active",
+    "in_service": true,
+    "country": "Turkey",
+    "age": 17
+  },
+  {
+    "registration": "HL7776",
+    "aircraft": "A320-200",
+    "livery": "Asiana Airlines",
+    "airline": "Asiana Airlines",
+    "operator": "CIT Leasing Corporation",
+    "status": "Active",
+    "in_service": true,
+    "country": "South Korea",
+    "age": 9
+  },
+
+
+
+
+
+
+
+
+
+
+  {
     "registration": "N845FD",
     "aircraft": "Boeing 777-F",
     "livery": "FedEx",
