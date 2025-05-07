@@ -10,40 +10,107 @@
     "country": "United Kingdom",
     "age": 51
   },
-  
+  [
   {
     "registration": "YR-BAC",
-    "aircraft": "B737-300",
-    "livery": "Blue Air",
-    "airline": "Blue Air",
+    "aircraft": "Boeing 737-300",
+    "livery": "Airwork Flight Operations Ltd",
+    "airline": null,
     "operator": "Airwork Flight Operations Ltd",
     "status": "Active",
     "in_service": true,
-    "country": "Romania",
+    "country": "Unknown",
     "age": 31
   },
   {
+    "registration": "YR-BAE",
+    "aircraft": "Boeing 737-400",
+    "livery": "Monroe Aircraft Ireland Ltd",
+    "airline": null,
+    "operator": "Monroe Aircraft Ireland Ltd",
+    "status": "Active",
+    "in_service": true,
+    "country": "Unknown",
+    "age": 20
+  },
+  {
+    "registration": "YR-BAF",
+    "aircraft": "Boeing 737-300",
+    "livery": "MSN 24453 Ltd",
+    "airline": null,
+    "operator": "MSN 24453 Ltd",
+    "status": "Active",
+    "in_service": true,
+    "country": "Unknown",
+    "age": 28
+  },
+  {
+    "registration": "D-ABMR",
+    "aircraft": "Boeing 737-800",
+    "livery": "Unknown",
+    "airline": null,
+    "operator": null,
+    "status": "Active",
+    "in_service": true,
+    "country": "Unknown",
+    "age": 4
+  },
+  {
     "registration": "TC-OCE",
-    "aircraft": "A330-200",
-    "livery": "Onur Air",
-    "airline": "Onur Air",
+    "aircraft": "Airbus A330-200",
+    "livery": "CLJ Avenue Limited",
+    "airline": null,
     "operator": "CLJ Avenue Limited",
     "status": "Active",
     "in_service": true,
-    "country": "Turkey",
+    "country": "Unknown",
     "age": 17
   },
   {
+    "registration": "TC-OCI",
+    "aircraft": "Airbus A330-200",
+    "livery": "International Lease Finance Corp",
+    "airline": null,
+    "operator": "International Lease Finance Corp",
+    "status": "Active",
+    "in_service": true,
+    "country": "Unknown",
+    "age": 13
+  },
+  {
+    "registration": "HL7775",
+    "aircraft": "Boeing 777-200",
+    "livery": "OZ",
+    "airline": "OZ",
+    "operator": null,
+    "status": "Active",
+    "in_service": true,
+    "country": "South Korea",
+    "age": 8
+  },
+  {
     "registration": "HL7776",
-    "aircraft": "A320-200",
-    "livery": "Asiana Airlines",
-    "airline": "Asiana Airlines",
+    "aircraft": "Airbus A320-200",
+    "livery": "CIT Leasing Corporation",
+    "airline": null,
     "operator": "CIT Leasing Corporation",
     "status": "Active",
     "in_service": true,
     "country": "South Korea",
     "age": 9
   },
+  {
+    "registration": "G-ZAPZ",
+    "aircraft": "Boeing 737-300",
+    "livery": "Ansett Worldwide Aviation",
+    "airline": null,
+    "operator": "Ansett Worldwide Aviation",
+    "status": "Active",
+    "in_service": true,
+    "country": "United Kingdom",
+    "age": 26
+  }
+  ]
 
 
 
