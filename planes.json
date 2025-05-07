@@ -10,6 +10,18 @@
     "country": "United Kingdom",
     "age": 51
   },
+  
+  {
+    "registration": "N845FD",
+    "aircraft": "Boeing 777-F",
+    "livery": "FedEx",
+    "airline": "FedEx",
+    "operator": "FedEx",
+    "status": "In Service",
+    "in_service": true,
+    "country": "United States",
+    "age": 4
+  },
   {
     "registration": "G-TTNM",
     "aircraft": "Airbus A320-251N",
