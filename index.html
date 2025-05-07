@@ -18,52 +18,60 @@
     <section class="search-container">
       <div class="search-box">
         <input type="text" id="regInput" placeholder="e.g. G-BOAC" />
-        <button onclick="searchPlane()">Search</button>
+        <button id="searchBtn">Search</button>
       </div>
       <div id="result"></div>
       <p id="regCount">Loading registrations...</p>
     </section>
   </main>
 
-  
-
   <script>
+    const regInput = document.getElementById("regInput");
+    const resultDiv = document.getElementById("result");
+    const regCount = document.getElementById("regCount");
+    const searchBtn = document.getElementById("searchBtn");
+
     let planes = [];
 
     fetch('planes.json')
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         planes = data;
-        document.getElementById("regCount").textContent = `Registrations supported: ${planes.length}`;
+        regCount.textContent = `Registrations supported: ${planes.length}`;
       })
-      .catch(error => {
-        console.error("Error loading planes.json:", error);
-        document.getElementById("regCount").textContent = "Failed to load registrations.";
+      .catch(() => {
+        regCount.textContent = "Error loading registrations.";
       });
 
     function searchPlane() {
-      const input = document.getElementById("regInput").value.trim().toUpperCase();
-      const result = planes.find(p => p.registration === input);
-      const resultDiv = document.getElementById("result");
+      const query = regInput.value.trim().toUpperCase();
+      if (!query || query.length < 2) {
+        resultDiv.innerHTML = '<p style="color: orange;">Please enter a valid registration.</p>';
+        return;
+      }
 
-      if (result) {
+      const plane = planes.find(p => p.registration === query);
+
+      if (plane) {
         resultDiv.innerHTML = `
-          <h2>${result.registration}</h2>
+          <h2>${plane.registration}</h2>
           <ul>
-            <li><strong>Aircraft:</strong> ${result.aircraft}</li>
-            <li><strong>Livery:</strong> ${result.livery}</li>
-            <li><strong>Airline:</strong> ${result.airline}</li>
-            <li><strong>Operator:</strong> ${result.operator}</li>
-            <li><strong>Status:</strong> ${result.status}</li>
-            <li><strong>In Service:</strong> ${result.in_service ? "Yes" : "No"}</li>
-            <li><strong>Country:</strong> ${result.country}</li>
-            <li><strong>Age:</strong> ${result.age} years</li>
+            <li><strong>Aircraft:</strong> ${plane.aircraft}</li>
+            <li><strong>Livery:</strong> ${plane.livery}</li>
+            <li><strong>Airline:</strong> ${plane.airline}</li>
+            <li><strong>Operator:</strong> ${plane.operator}</li>
+            <li><strong>Status:</strong> ${plane.status}</li>
+            <li><strong>In Service:</strong> ${plane.in_service ? "Yes" : "No"}</li>
+            <li><strong>Country:</strong> ${plane.country}</li>
+            <li><strong>Age:</strong> ${plane.age} years</li>
           </ul>
         `;
       } else {
         resultDiv.innerHTML = `<p style="color: red;">Plane not found.</p>`;
       }
     }
+
+    searchBtn.addEventListener("click", searchPlane);
   </script>
 </body>
 </html>
