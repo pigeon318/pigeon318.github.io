@@ -7,20 +7,24 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to top right, #d0dde1, #d0dde1); /* soft sky gradient */
+  background: linear-gradient(to top right, #d0dde1, #e8f6fb); /* smoother sky gradient */
   color: #1a237e;
   padding: 0 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background 0.5s ease;
 }
 
 header {
-  background: #ccf2ff;
+  background: linear-gradient(to bottom, #ccf2ff, #d0dde1); /* blended with body */
   color: white;
   padding: 30px 0;
   text-align: center;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  transition: background 0.5s ease;
 }
 
 .title {
@@ -113,7 +117,8 @@ footer {
     flex-direction: column;
   }
 
-  button, #regInput {
+  button,
+  #regInput {
     width: 100%;
   }
 }
