@@ -11,13 +11,13 @@
   <header>
     <div class="container">
       <h1 class="title">planesearch.info</h1>
-a    </div>
+   </div>
   </header>
 
   <main>
     <section class="search-container">
       <div class="search-box">
-        <input type="text" id="regInput" placeholder="e.g. G-BOAC" />
+        <input type="text" id="regInput" placeholder="TC-SPK" />
         <button id="searchBtn">Search</button>
       </div>
       <div id="result"></div>
@@ -40,7 +40,7 @@ a    </div>
         regCount.textContent = `Registrations supported: ${planes.length}`;
       })
       .catch(() => {
-        regCount.textContent = "Error loading registrations.";
+        regCount.textContent = "Error loading registrations";
       });
 
     function searchPlane() {
