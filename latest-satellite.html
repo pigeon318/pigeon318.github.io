@@ -1,30 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Latest Satellite Image</title>
+  <meta charset="UTF-8">
+  <title>Satellite Image Viewer</title>
 </head>
 <body>
-  <h1>Latest Decoded Satellite Image</h1>
-
-  <label><input type="checkbox" id="rain" onchange="updateImage()"> Rain</label>
-  <label><input type="checkbox" id="border" onchange="updateImage()"> Border</label>
+  <h1>Latest Satellite Image</h1>
+  <label>
+    <input type="checkbox" id="rainCheckbox"> Rain
+  </label>
+  <label>
+    <input type="checkbox" id="borderCheckbox"> Border
+  </label>
 
   <br><br>
-  <img id="satImage" src="/images/none.jpg" alt="Latest Satellite Image" style="max-width:100%;">
+  <img id="satImage" src="avhrr_3_rgb_MSA_(Uncalibrated)_map.png" alt="Satellite Image" width="600">
 
   <script>
+    const rainCheckbox = document.getElementById('rainCheckbox');
+    const borderCheckbox = document.getElementById('borderCheckbox');
+    const satImage = document.getElementById('satImage');
+
     function updateImage() {
-      const rain = document.getElementById('rain').checked;
-      const border = document.getElementById('border').checked;
+      const rain = rainCheckbox.checked;
+      const border = borderCheckbox.checked;
 
-      let imageName = 'avhrr_3_rgb_MSA_(Uncalibrated)_map.png; // default
+      let imageName = "";
 
-      if (rain && border) imageName = 'rain_border.jpg';
-      else if (rain) imageName = 'rain.jpg';
-      else if (border) imageName = 'border.jpg';
+      if (rain && border) {
+        imageName = "rain-border.png";
+      } else if (rain && !border) {
+        imageName = "rain.png";
+      } else if (!rain && border) {
+        imageName = "border.png";
+      } else {
+        imageName = "avhrr_3_rgb_MSA_(Uncalibrated)_map.png";
+      }
 
-      document.getElementById('satImage').src = `/images/${imageName}`;
+      satImage.src = imageName;
     }
+
+    rainCheckbox.addEventListener('change', updateImage);
+    borderCheckbox.addEventListener('change', updateImage);
   </script>
 </body>
 </html>
