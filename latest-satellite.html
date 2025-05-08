@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Latest Satellite Image</title>
+</head>
+<body>
+  <h1>Latest Decoded Satellite Image</h1>
+
+  <label><input type="checkbox" id="rain" onchange="updateImage()"> Rain</label>
+  <label><input type="checkbox" id="border" onchange="updateImage()"> Border</label>
+
+  <br><br>
+  <img id="satImage" src="/images/none.jpg" alt="Latest Satellite Image" style="max-width:100%;">
+
+  <script>
+    function updateImage() {
+      const rain = document.getElementById('rain').checked;
+      const border = document.getElementById('border').checked;
+
+      let imageName = 'none.jpg'; // default
+
+      if (rain && border) imageName = 'rain_border.jpg';
+      else if (rain) imageName = 'rain.jpg';
+      else if (border) imageName = 'border.jpg';
+
+      document.getElementById('satImage').src = `/images/${imageName}`;
+    }
+  </script>
+</body>
+</html>
