@@ -14,7 +14,7 @@
   </label>
 
   <br><br>
-  <img id="satImage" src="avhrr_3_rgb_MSA_(Uncalibrated).png" alt="Satellite Image" width="600">
+  <img id="satImage"avhrr_3_rgb_MCIR_(Uncalibrated).png" alt="Satellite Image" width="600">
 
   <script>
     const rainCheckbox = document.getElementById('rainCheckbox');
@@ -28,13 +28,13 @@
       let imageName = "";
 
       if (rain && border) {
-        imageName = "avhrr_3_rgb_MCIR_Rain_(Uncalibrated)_map (1).png";
+        imageName = "avhrr_3_rgb_MCIR_Rain_(Uncalibrated)_map (2).png";
       } else if (rain && !border) {
-        imageName = "avhrr_3_rgb_MCIR_Rain_(Uncalibrated).png";
+        imageName = "avhrr_3_rgb_MCIR_Rain_(Uncalibrated) (1).png";
       } else if (!rain && border) {
-        imageName = "avhrr_3_rgb_MSA_(Uncalibrated)_map.png";
+        imageName = "avhrr_3_rgb_MCIR_(Uncalibrated)_map (2).png";
       } else {
-        imageName = "avhrr_3_rgb_MSA_(Uncalibrated)_map.png";
+        imageName = "avhrr_3_rgb_MCIR_(Uncalibrated).png";
       }
 
       satImage.src = imageName;
