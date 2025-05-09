@@ -88,6 +88,17 @@
     "country": "South Korea",
     "age": 8
   },
+    {
+    "registration": "G-EUUB",
+    "aircraft": "Airbus A320-232",
+    "livery": "British Airways",
+    "airline": "British Airways",
+    "operator": "British Airways",
+    "status": "Active",
+    "in_service": true,
+    "country": "United kingdom",
+    "age": 21
+  },
   {
     "registration": "HL7776",
     "aircraft": "Airbus A320-200",
