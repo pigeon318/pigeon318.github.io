@@ -10,7 +10,63 @@
     "country": "United Kingdom",
     "age": 51
   },
-
+  [
+  {
+    "registration": "N123AA",
+    "aircraft": "Boeing 757-223",
+    "livery": "American Airlines",
+    "airline": "American Airlines",
+    "operator": "American Airlines",
+    "status": "Retired",
+    "in_service": false,
+    "country": "United States",
+    "age": 30
+  },
+  {
+    "registration": "D-ABYA",
+    "aircraft": "Boeing 747-8",
+    "livery": "Lufthansa",
+    "airline": "Lufthansa",
+    "operator": "Lufthansa",
+    "status": "Active",
+    "in_service": true,
+    "country": "Germany",
+    "age": 11
+  },
+  {
+    "registration": "JA801A",
+    "aircraft": "Boeing 787-8",
+    "livery": "ANA",
+    "airline": "All Nippon Airways",
+    "operator": "All Nippon Airways",
+    "status": "Active",
+    "in_service": true,
+    "country": "Japan",
+    "age": 13
+  },
+  {
+    "registration": "VH-OJS",
+    "aircraft": "Boeing 747-438",
+    "livery": "Qantas",
+    "airline": "Qantas",
+    "operator": "Qantas",
+    "status": "Retired",
+    "in_service": false,
+    "country": "Australia",
+    "age": 23
+  },
+  {
+    "registration": "C-FIVW",
+    "aircraft": "Airbus A319-114",
+    "livery": "Air Canada",
+    "airline": "Air Canada",
+    "operator": "Air Canada",
+    "status": "Active",
+    "in_service": true,
+    "country": "Canada",
+    "age": 22
+  }
+  ]
   {
     "registration": "YR-BAC",
     "aircraft": "Boeing 737-300",
