@@ -10,7 +10,7 @@
     "country": "United Kingdom",
     "age": 51
   },
-  [
+  
   {
     "registration": "N123AA",
     "aircraft": "Boeing 757-223",
@@ -65,8 +65,8 @@
     "in_service": true,
     "country": "Canada",
     "age": 22
-  }
-  ]
+  },
+  
   {
     "registration": "YR-BAC",
     "aircraft": "Boeing 737-300",
