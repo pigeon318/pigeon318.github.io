@@ -34,6 +34,13 @@
   </main>
 
   <script>
+    document.getElementById("operatorSearch").addEventListener("input", function () {
+  const term = this.value.toLowerCase();
+  document.querySelectorAll("#operator-stats tbody tr").forEach(row => {
+    const show = row.children[0].textContent.toLowerCase().includes(term);
+    row.style.display = show ? "" : "none";
+  });
+});
     const statsTableBody = document.querySelector("#operator-stats tbody");
     fetch('Pigeon.json')
       .then(res => res.json())
