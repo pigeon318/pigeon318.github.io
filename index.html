@@ -28,6 +28,25 @@
       <div id="result"></div>
       <p id="regCount">Loading registrations</p>
     </section>
+
+    <section id="aircraft-of-day" class="section">
+      <h2>Aircraft of the Day</h2>
+      <div id="randomAircraftBox"></div>
+    </section>
+
+    <section id="operator-stats-section" class="section">
+      <h2>Operator Statistics</h2>
+      <table id="operator-stats">
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Number of Aircraft</th>
+            <th>Average Age</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
   </main>
 
   <script>
@@ -35,6 +54,8 @@
     const resultDiv = document.getElementById("result");
     const regCount = document.getElementById("regCount");
     const searchBtn = document.getElementById("searchBtn");
+    const randomAircraftBox = document.getElementById("randomAircraftBox");
+    const statsTableBody = document.querySelector("#operator-stats tbody");
 
     let planes = [];
 
@@ -43,6 +64,8 @@
       .then(data => {
         planes = data;
         regCount.textContent = `Registrations supported: ${planes.length}`;
+        showRandomAircraft();
+        showOperatorStats();
       })
       .catch(() => {
         regCount.textContent = "Error loading registrations";
@@ -74,6 +97,36 @@
       } else {
         resultDiv.innerHTML = `<p style="color: red;">Plane not found.</p>`;
       }
+    }
+
+    function showRandomAircraft() {
+      const random = planes[Math.floor(Math.random() * planes.length)];
+      randomAircraftBox.innerHTML = `
+        <p><strong>Registration:</strong> ${random.registration}</p>
+        <p><strong>Aircraft:</strong> ${random.aircraft}</p>
+        <p><strong>Airline:</strong> ${random.airline}</p>
+        <p><strong>Status:</strong> ${random.status}</p>
+      `;
+    }
+
+    function showOperatorStats() {
+      const operatorStats = {};
+
+      planes.forEach(ac => {
+        const op = ac.operator || "Unknown";
+        if (!operatorStats[op]) {
+          operatorStats[op] = { count: 0, totalAge: 0 };
+        }
+        operatorStats[op].count++;
+        operatorStats[op].totalAge += ac.age || 0;
+      });
+
+      Object.entries(operatorStats).forEach(([op, stats]) => {
+        const avgAge = (stats.totalAge / stats.count).toFixed(1);
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${op}</td><td>${stats.count}</td><td>${avgAge}</td>`;
+        statsTableBody.appendChild(row);
+      });
     }
 
     searchBtn.addEventListener("click", searchPlane);
