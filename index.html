@@ -78,6 +78,9 @@
     }
 
     searchBtn.addEventListener("click", searchPlane);
+regInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") searchPlane();
+});
   </script>
 </body>
 </html>
