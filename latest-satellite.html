@@ -6,6 +6,7 @@
 </head>
 <body>
   <h1>Latest Satellite Image</h1>
+
   <label>
     <input type="checkbox" id="rainCheckbox"> Rain
   </label>
@@ -14,7 +15,8 @@
   </label>
 
   <br><br>
-  <img  "avhrr_3_rgb_MCIR_(Uncalibrated).png" alt="Satellite Image" width="600">
+
+  <img id="satImage" src="avhrr_3_rgb_MCIR_(Uncalibrated).png" alt="Satellite Image" width="600">
 
   <script>
     const rainCheckbox = document.getElementById('rainCheckbox');
@@ -39,6 +41,9 @@
 
       satImage.src = imageName;
     }
+
+    // Optional: ensure image loads correctly on first visit
+    window.onload = updateImage;
 
     rainCheckbox.addEventListener('change', updateImage);
     borderCheckbox.addEventListener('change', updateImage);
