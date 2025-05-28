@@ -6,8 +6,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to top right, #ffe6e6, #fff5f5); /* light reds */
-  color: #7f0000;
+  background: linear-gradient(to top right, #4e0000, #660000); /* dark red gradient */
+  color: #ffcccc;
   padding: 0 20px;
   min-height: 100vh;
   display: flex;
@@ -15,7 +15,7 @@ body {
 }
 
 header {
-  background: linear-gradient(to bottom, #ffcccc, #ffe6e6); /* soft reds */
+  background: linear-gradient(to bottom, #800000, #4e0000);
   color: white;
   padding: 30px 0;
   text-align: center;
@@ -36,7 +36,7 @@ header {
   position: absolute;
   top: 20px;
   right: 20px;
-  background-color: #b71c1c; /* dark red */
+  background-color: #8b0000;
   padding: 10px;
   border-radius: 50%;
   display: flex;
@@ -46,7 +46,7 @@ header {
 }
 
 .satellite-button:hover {
-  background-color: #7f0000; /* deeper red */
+  background-color: #5a0000;
 }
 
 .satellite-icon {
@@ -66,10 +66,11 @@ main {
 .search-container {
   width: 100%;
   max-width: 600px;
-  background: white;
+  background: #1a0000;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   padding: 30px;
+  color: #ffcccc;
 }
 
 .search-box {
@@ -84,21 +85,23 @@ main {
   flex: 1;
   padding: 12px;
   font-size: 1.1rem;
-  border: 2px solid #b71c1c;
+  border: 2px solid #8b0000;
   border-radius: 8px;
   outline: none;
+  background: #330000;
+  color: #ffcccc;
   transition: 0.3s;
 }
 
 #regInput:focus {
-  border-color: #d32f2f;
-  box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);
+  border-color: #ff4444;
+  box-shadow: 0 0 5px rgba(255, 68, 68, 0.4);
 }
 
 button {
   padding: 12px 20px;
   font-size: 1.1rem;
-  background-color: #b71c1c;
+  background-color: #8b0000;
   color: white;
   border: none;
   border-radius: 8px;
@@ -107,22 +110,23 @@ button {
 }
 
 button:hover {
-  background-color: #d32f2f;
+  background-color: #5a0000;
 }
 
 #result {
   margin-top: 20px;
   padding: 20px;
-  background: #ffe6e6;
+  background: #2a0000;
   border-radius: 12px;
-  border: 1px solid #f8bbd0;
+  border: 1px solid #ff6666;
   font-size: 1rem;
   line-height: 1.6;
+  color: #ffcccc;
 }
 
 #result h2 {
   font-family: 'Anton', sans-serif;
-  color: #b71c1c;
+  color: #ff4444;
   margin-bottom: 10px;
 }
 
@@ -130,7 +134,7 @@ footer {
   text-align: center;
   padding: 20px 0;
   font-size: 0.9rem;
-  color: #b71c1c;
+  color: #ff9999;
 }
 
 /* Mobile Responsive */
