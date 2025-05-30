@@ -1,0 +1,68 @@
+<!-- ai.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Plane Identifier</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #2d2d2d;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #ff4444;
+      margin-bottom: 20px;
+    }
+    #upload {
+      margin: 20px 0;
+    }
+    #result {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #ffaaaa;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+</head>
+<body>
+  <h1>AI Plane Identifier</h1>
+  <input type="file" id="upload" accept="image/*" />
+  <div id="result">Upload a photo of a plane to identify it.</div>
+
+  <script>
+    const URL = "model/"; // Change to your model folder path
+
+    let model;
+
+    async function init() {
+      const modelURL = URL + "model.json";
+      const metadataURL = URL + "metadata.json";
+      model = await tmImage.load(modelURL, metadataURL);
+    }
+
+    document.getElementById("upload").addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const img = new Image();
+      img.onload = async () => {
+        const prediction = await model.predict(img);
+        const best = prediction.sort((a, b) => b.probability - a.probability)[0];
+        document.getElementById("result").innerText =
+          `Identified as: ${best.className} (${(best.probability * 100).toFixed(2)}%)`;
+      };
+      img.src = URL.createObjectURL(file);
+    });
+
+    init();
+  </script>
+</body>
+</html>
