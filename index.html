@@ -9,78 +9,82 @@
 </head>
 <body>
 <header>
-  <button class="menu-button" aria-label="Open Menu">
+  <button class="menu-button" aria-label="Open Menu" onclick="toggleMenu()">
     <div class="bar"></div>
     <div class="bar"></div>
     <div class="bar"></div>
-    <ul id="menuOptions">
-  <li><a href="ai.html">AI Plane Identification</a></li>
-    </ul>
   </button>
-  
+  <ul id="menuOptions">
+    <li><a href="ai.html">AI Plane Identification</a></li>
+  </ul>
 </header>
-  <main>
-    <section class="search-container">
-      <div class="search-box">
-        <input type="text" id="regInput" placeholder="enter reg here" />
-        <button id="searchBtn">Search</button>
-      </div>
-      <div id="result"></div>
-      <p id="regCount">Loading registrations</p>
-      <a href="/operator-stats.html" class="nav-link">Operator Stats</a>
-    </section>
-  </main>
 
-  <script>
-    const regInput = document.getElementById("regInput");
-    const resultDiv = document.getElementById("result");
-    const regCount = document.getElementById("regCount");
-    const searchBtn = document.getElementById("searchBtn");
+<main>
+  <section class="search-container">
+    <div class="search-box">
+      <input type="text" id="regInput" placeholder="enter reg here" />
+      <button id="searchBtn">Search</button>
+    </div>
+    <div id="result"></div>
+    <p id="regCount">Loading registrations</p>
+    <a href="/operator-stats.html" class="nav-link">Operator Stats</a>
+  </section>
+</main>
 
-    let planes = [];
+<script>
+  const regInput = document.getElementById("regInput");
+  const resultDiv = document.getElementById("result");
+  const regCount = document.getElementById("regCount");
+  const searchBtn = document.getElementById("searchBtn");
 
-    fetch('Pigeon.json')
-      .then(res => res.json())
-      .then(data => {
-        planes = data;
-        regCount.textContent = `Registrations supported: ${planes.length}`;
-      })
-      .catch(() => {
-        regCount.textContent = "Error loading registrations";
-      });
+  let planes = [];
 
-    function searchPlane() {
-      const query = regInput.value.trim().toUpperCase();
-      if (!query || query.length < 2) {
-        resultDiv.innerHTML = '<p style="color: orange;">Please enter a valid registration.</p>';
-        return;
-      }
+  fetch('Pigeon.json')
+    .then(res => res.json())
+    .then(data => {
+      planes = data;
+      regCount.textContent = `Registrations supported: ${planes.length}`;
+    })
+    .catch(() => {
+      regCount.textContent = "Error loading registrations";
+    });
 
-      const plane = planes.find(p => p.registration === query);
-
-      if (plane) {
-        resultDiv.innerHTML = `
-          <h2>${plane.registration}</h2>
-          <ul>
-            <li><strong>Aircraft:</strong> ${plane.aircraft}</li>
-            <li><strong>Livery:</strong> ${plane.livery}</li>
-            <li><strong>Airline:</strong> ${plane.airline}</li>
-            <li><strong>Operator:</strong> ${plane.operator}</li>
-            <li><strong>Status:</strong> ${plane.status}</li>
-            <li><strong>In Service:</strong> ${plane.in_service ? "Yes" : "No"}</li>
-            <li><strong>Country:</strong> ${plane.country}</li>
-            <li><strong>Age:</strong> ${plane.age} years</li>
-          </ul>
-        `;
-      } else {
-        resultDiv.innerHTML = `<p style="color: red;">Plane not found.</p>`;
-      }
+  function searchPlane() {
+    const query = regInput.value.trim().toUpperCase();
+    if (!query || query.length < 2) {
+      resultDiv.innerHTML = '<p style="color: orange;">Please enter a valid registration.</p>';
+      return;
     }
 
-    searchBtn.addEventListener("click", searchPlane);
-regInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") searchPlane();
-});
-  </script>
+    const plane = planes.find(p => p.registration === query);
+
+    if (plane) {
+      resultDiv.innerHTML = `
+        <h2>${plane.registration}</h2>
+        <ul>
+          <li><strong>Aircraft:</strong> ${plane.aircraft}</li>
+          <li><strong>Livery:</strong> ${plane.livery}</li>
+          <li><strong>Airline:</strong> ${plane.airline}</li>
+          <li><strong>Operator:</strong> ${plane.operator}</li>
+          <li><strong>Status:</strong> ${plane.status}</li>
+          <li><strong>In Service:</strong> ${plane.in_service ? "Yes" : "No"}</li>
+          <li><strong>Country:</strong> ${plane.country}</li>
+          <li><strong>Age:</strong> ${plane.age} years</li>
+        </ul>
+      `;
+    } else {
+      resultDiv.innerHTML = `<p style="color: red;">Plane not found.</p>`;
+    }
+  }
+
+  searchBtn.addEventListener("click", searchPlane);
+  regInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") searchPlane();
+  });
+
+  function toggleMenu() {
+    document.getElementById("menuOptions").classList.toggle("show");
+  }
+</script>
 </body>
 </html>
