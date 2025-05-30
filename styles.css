@@ -1,3 +1,4 @@
+/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,48 +7,69 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to top right, #c23b3b, #e57373);
-  color: #ffffff;
+  background: linear-gradient(to top right, #8b0000, #b22222);
+  color: #fff;
   padding: 0 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* Header and Menu Button */
 header {
-  background: transparent;
+  background-color: #600000;
   padding: 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  box-shadow: none;
+  position: relative;
 }
 
-/* Hamburger Menu Button */
 .menu-button {
   background: none;
   border: none;
   cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 24px;
-  width: 30px;
-  padding: 0;
+  gap: 5px;
 }
 
-.menu-button .bar {
-  width: 100%;
+.bar {
+  width: 30px;
   height: 4px;
   background-color: white;
   border-radius: 2px;
-  transition: 0.3s;
 }
 
-.menu-button:hover .bar {
-  background-color: #f0f0f0;
+/* Dropdown Menu */
+#menuOptions {
+  list-style: none;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  background: #600000;
+  border-radius: 8px;
+  overflow: hidden;
+  display: none;
+  z-index: 1000;
 }
 
+#menuOptions.show {
+  display: block;
+}
+
+#menuOptions li a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+}
+
+#menuOptions li a:hover {
+  background: #800000;
+}
+
+/* Main Container */
 main {
   flex: 1;
   display: flex;
@@ -66,6 +88,7 @@ main {
   color: #333;
 }
 
+/* Search Box */
 .search-box {
   display: flex;
   flex-wrap: wrap;
@@ -85,8 +108,8 @@ main {
 }
 
 #regInput:focus {
-  border-color: #b71c1c;
-  box-shadow: 0 0 5px rgba(183, 28, 28, 0.3);
+  border-color: #b22222;
+  box-shadow: 0 0 5px rgba(178, 34, 34, 0.3);
 }
 
 button {
@@ -101,34 +124,83 @@ button {
 }
 
 button:hover {
-  background-color: #b71c1c;
+  background-color: #b22222;
 }
 
+/* Result Output */
 #result {
   margin-top: 20px;
   padding: 20px;
-  background: #fff5f5;
+  background: #ffecec;
   border-radius: 12px;
-  border: 1px solid #ffcdd2;
+  border: 1px solid #f5c2c2;
   font-size: 1rem;
   line-height: 1.6;
-  color: #333;
+  color: #000;
 }
 
 #result h2 {
   font-family: 'Anton', sans-serif;
-  color: #b71c1c;
+  color: #a52a2a;
   margin-bottom: 10px;
 }
 
+/* Registration Count */
+#regCount {
+  text-align: center;
+  margin-top: 10px;
+  color: #222;
+  font-weight: bold;
+}
+
+/* Nav Link */
+.nav-link {
+  display: block;
+  margin-top: 15px;
+  text-align: center;
+  color: #a52a2a;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* AI Page Styles */
+.ai-page {
+  background: linear-gradient(to bottom, #550000, #770000);
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+
+.ai-page input[type="file"] {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: white;
+  color: #600000;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.ai-page #result {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 20px 0;
   font-size: 0.9rem;
-  color: #ffcccb;
+  color: #fdd;
 }
 
-/* Mobile Responsive */
+/* Responsive */
 @media (max-width: 600px) {
   .search-box {
     flex-direction: column;
@@ -140,87 +212,11 @@ footer {
   }
 
   .menu-button {
-    width: 24px;
-    height: 20px;
+    top: 10px;
+    right: 10px;
   }
 
-  .menu-button .bar {
-    height: 3px;
+  #menuOptions {
+    right: 10px;
   }
-}
-/* ===== AI Plane Identifier Page ===== */
-.ai-page {
-  font-family: 'Roboto', sans-serif;
-  background: #2d2d2d;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  text-align: center;
-  padding: 20px;
-}
-
-.ai-page h1 {
-  color: #ff4444;
-  margin-bottom: 20px;
-}
-
-#upload {
-  margin: 20px 0;
-  font-size: 1rem;
-  padding: 12px;
-  border: 2px solid #ff4444;
-  border-radius: 8px;
-  background: #3a3a3a;
-  color: white;
-  cursor: pointer;
-}
-
-#result {
-  font-size: 1.2rem;
-  margin-top: 20px;
-  color: #ffaaaa;
-  max-width: 90%;
-}
-
-/* ===== Menu Options Dropdown ===== */
-#menuOptions {
-  list-style: none;
-  position: absolute;
-  top: 60px;
-  right: 20px;
-  background-color: #660000;
-  padding: 10px 20px;
-  border-radius: 8px;
-  display: none;
-  z-index: 999;
-}
-
-#menuOptions li {
-  margin: 10px 0;
-}
-
-#menuOptions a {
-  color: white;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
-
-#menu-toggle.active + #menuOptions {
-  display: block;
-}
-
-/* Ensure menu icon is clickable and styled consistently */
-#menu-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: white;
-  cursor: pointer;
-  z-index: 1000;
 }
