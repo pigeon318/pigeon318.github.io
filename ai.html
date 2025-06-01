@@ -23,8 +23,10 @@
     <section class="ai-section">
       <h1>AI Plane Identifier</h1>
       <p>Select or take a picture of a plane to identify it.</p>
-      <input type="file" accept="image/*" onchange="handleUpload(event)">
+      <input type="file" accept="image/*" id="fileInput">
       <img id="preview" alt="Image preview" style="display:none; max-width:300px; margin-top:10px;" />
+      <br>
+      <button onclick="runPrediction()" id="submitBtn" disabled>Submit</button>
       <div id="result" style="margin-top: 20px; font-size: 1.2em;">No prediction yet.</div>
     </section>
   </main>
@@ -32,6 +34,7 @@
   <script>
     const URL = "https://teachablemachine.withgoogle.com/models/kdYv2Y8pv/";
     let model;
+    let imageLoaded = false;
 
     async function loadModel() {
       const modelURL = URL + "model.json";
@@ -40,21 +43,26 @@
       console.log("Model loaded.");
     }
 
-    async function handleUpload(event) {
+    document.getElementById("fileInput").addEventListener("change", function(event) {
       const file = event.target.files[0];
       if (!file) return;
 
       const img = document.getElementById("preview");
       img.src = URL.createObjectURL(file);
       img.style.display = "block";
+      imageLoaded = true;
+      document.getElementById("submitBtn").disabled = false;
+      document.getElementById("result").innerText = "Image loaded. Press Submit to analyze.";
+    });
 
-      img.onload = async () => {
-        const prediction = await model.predict(img);
-        prediction.sort((a, b) => b.probability - a.probability);
-        const best = prediction[0];
-        document.getElementById("result").innerHTML = 
-          `Prediction: <strong>${best.className}</strong><br>Confidence: <strong>${(best.probability * 100).toFixed(2)}%</strong>`;
-      };
+    async function runPrediction() {
+      if (!imageLoaded) return;
+      const img = document.getElementById("preview");
+      const prediction = await model.predict(img);
+      prediction.sort((a, b) => b.probability - a.probability);
+      const best = prediction[0];
+      document.getElementById("result").innerHTML = 
+        `Prediction: <strong>${best.className}</strong><br>Confidence: <strong>${(best.probability * 100).toFixed(2)}%</strong>`;
     }
 
     function toggleMenu() {
