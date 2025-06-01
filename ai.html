@@ -3,43 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Plane Identification</title>
+  <title>AI Plane Identifier</title>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="ai-page">
-  <h1>AI Plane Identification</h1>
-  <input type="file" accept="image/*" onchange="handleUpload(event)" />
-  <div id="result">Upload an image to identify the plane.</div>
+<body>
+  <header>
+    <button class="menu-button" onclick="toggleMenu()" aria-label="Open Menu">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </button>
+    <ul id="menuOptions">
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </header>
 
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  <main>
+    <section class="ai-section">
+      <h1>AI Plane Identifier</h1>
+      <p>Select or take a picture of a plane to identify it.</p>
+      <input type="file" accept="image/*" onchange="handleUpload(event)">
+      <img id="preview" alt="Image preview" style="display:none; max-width:300px; margin-top:10px;" />
+      <div id="result" style="margin-top: 20px; font-size: 1.2em;">No prediction yet.</div>
+    </section>
+  </main>
+
   <script>
     const URL = "https://teachablemachine.withgoogle.com/models/kdYv2Y8pv/";
-
-    let model, labelContainer;
+    let model;
 
     async function loadModel() {
       const modelURL = URL + "model.json";
       const metadataURL = URL + "metadata.json";
-
       model = await tmImage.load(modelURL, metadataURL);
-      labelContainer = document.getElementById("result");
+      console.log("Model loaded.");
     }
 
     async function handleUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
 
-      const img = document.createElement("img");
+      const img = document.getElementById("preview");
       img.src = URL.createObjectURL(file);
+      img.style.display = "block";
+
       img.onload = async () => {
         const prediction = await model.predict(img);
         prediction.sort((a, b) => b.probability - a.probability);
-        const top = prediction[0];
-        labelContainer.innerHTML = `
-          <p><strong>Prediction:</strong> ${top.className}</p>
-          <p><strong>Confidence:</strong> ${(top.probability * 100).toFixed(2)}%</p>
-        `;
+        const best = prediction[0];
+        document.getElementById("result").innerHTML = 
+          `Prediction: <strong>${best.className}</strong><br>Confidence: <strong>${(best.probability * 100).toFixed(2)}%</strong>`;
       };
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menuOptions");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
     }
 
     loadModel();
