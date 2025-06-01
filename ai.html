@@ -1,68 +1,48 @@
-<!-- ai.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Plane Identifier</title>
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: #2d2d2d;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      color: #ff4444;
-      margin-bottom: 20px;
-    }
-    #upload {
-      margin: 20px 0;
-    }
-    #result {
-      font-size: 1.2rem;
-      margin-top: 20px;
-      color: #ffaaaa;
-    }
-  </style>
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  <title>AI Plane Identification</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <h1>AI Plane Identifier</h1>
-  <input type="file" id="upload" accept="image/*" />
-  <div id="result">Upload a photo of a plane to identify it.</div>
+<body class="ai-page">
+  <h1>AI Plane Identification</h1>
+  <input type="file" accept="image/*" onchange="handleUpload(event)" />
+  <div id="result">Upload an image to identify the plane.</div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
   <script>
-    const URL = "model/"; // Change to your model folder path
+    const URL = "https://teachablemachine.withgoogle.com/models/kdYv2Y8pv/";
 
-    let model;
+    let model, labelContainer;
 
-    async function init() {
+    async function loadModel() {
       const modelURL = URL + "model.json";
       const metadataURL = URL + "metadata.json";
+
       model = await tmImage.load(modelURL, metadataURL);
+      labelContainer = document.getElementById("result");
     }
 
-    document.getElementById("upload").addEventListener("change", async (e) => {
-      const file = e.target.files[0];
+    async function handleUpload(event) {
+      const file = event.target.files[0];
       if (!file) return;
-      const img = new Image();
+
+      const img = document.createElement("img");
+      img.src = URL.createObjectURL(file);
       img.onload = async () => {
         const prediction = await model.predict(img);
-        const best = prediction.sort((a, b) => b.probability - a.probability)[0];
-        document.getElementById("result").innerText =
-          `Identified as: ${best.className} (${(best.probability * 100).toFixed(2)}%)`;
+        prediction.sort((a, b) => b.probability - a.probability);
+        const top = prediction[0];
+        labelContainer.innerHTML = `
+          <p><strong>Prediction:</strong> ${top.className}</p>
+          <p><strong>Confidence:</strong> ${(top.probability * 100).toFixed(2)}%</p>
+        `;
       };
-      img.src = URL.createObjectURL(file);
-    });
+    }
 
-    init();
+    loadModel();
   </script>
 </body>
 </html>
