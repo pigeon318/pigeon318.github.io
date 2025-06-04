@@ -6,64 +6,106 @@
   <title>AI Plane Identifier</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
-</head>
-<body>
-  <main class="ai-container">
-    <h1>AI Plane Identifier</h1>
-    <input type="file" id="imageUpload" accept="image/*" />
-    <br><br>
-    <img id="preview" style="max-width: 300px; display: none;" />
-    <br><br>
-    <button id="submitBtn">Submit</button>
-    <div id="predictionResult" class="result-box"></div>
-  </main>
-
-  <script>
-    const URL = "https://teachablemachine.withgoogle.com/models/kdYv2Y8pv/";
-    let model, maxPredictions;
-
-    const preview = document.getElementById("preview");
-    const imageUpload = document.getElementById("imageUpload");
-    const submitBtn = document.getElementById("submitBtn");
-    const resultBox = document.getElementById("predictionResult");
-
-    // Load the model
-    async function loadModel() {
-      const modelURL = URL + "model.json";
-      const metadataURL = URL + "metadata.json";
-      model = await tmImage.load(modelURL, metadataURL);
-      maxPredictions = model.getTotalClasses();
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      padding: 20px;
+      background-color: #f7f7f7;
+      text-align: center;
     }
 
-    // Preview image
-    imageUpload.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+    h1 {
+      font-family: 'Anton', sans-serif;
+      color: #b30000;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
 
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        preview.src = event.target.result;
-        preview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    });
+    #uploadedImage {
+      max-width: 100%;
+      height: auto;
+      margin-top: 15px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      display: none;
+    }
 
-    // On submit, make prediction
-    submitBtn.addEventListener("click", async () => {
-      if (!preview.src || !model) {
-        resultBox.innerHTML = "<p>Please upload an image and wait for model to load.</p>";
+    input[type="file"] {
+      margin: 10px 0;
+    }
+
+    button {
+      background-color: #b30000;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #cc0000;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+
+    #status {
+      margin-bottom: 10px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>AI Plane Identifier</h1>
+  <p id="status">Please wait for model to load...</p>
+
+  <input type="file" accept="image/*" onchange="loadImage(event)">
+  <br>
+  <img id="uploadedImage" alt="Uploaded Image">
+  <br>
+  <button onclick="predict()">Submit</button>
+
+  <div id="result"></div>
+
+  <script>
+    const modelURL = "https://teachablemachine.withgoogle.com/models/kdYv2Y8pv/model.json";
+    const metadataURL = "https://teachablemachine.withgoogle.com/models/kdYv2Y8pv/metadata.json";
+
+    let model, maxPredictions;
+
+    async function init() {
+      model = await tmImage.load(modelURL, metadataURL);
+      maxPredictions = model.getTotalClasses();
+      document.getElementById("status").textContent = "Model loaded. Choose image and click Submit.";
+    }
+
+    function loadImage(event) {
+      const image = document.getElementById("uploadedImage");
+      image.src = URL.createObjectURL(event.target.files[0]);
+      image.style.display = "block";
+      document.getElementById("result").innerHTML = "";
+    }
+
+    async function predict() {
+      const image = document.getElementById("uploadedImage");
+      if (!image.src) {
+        alert("Please upload an image first.");
         return;
       }
 
-      const prediction = await model.predict(preview);
-      prediction.sort((a, b) => b.probability - a.probability);
+      const prediction = await model.predict(image);
+      let output = "<h2>Prediction Results:</h2>";
+      prediction.forEach(p => {
+        output += `${p.className}: ${(p.probability * 100).toFixed(2)}%<br>`;
+      });
+      document.getElementById("result").innerHTML = output;
+    }
 
-      resultBox.innerHTML = `<h2>Prediction:</h2>
-        <p><strong>${prediction[0].className}</strong> (${(prediction[0].probability * 100).toFixed(2)}%)</p>`;
-    });
-
-    // Load model when page loads
-    window.addEventListener("load", loadModel);
+    window.addEventListener("load", init);
   </script>
 </body>
 </html>
