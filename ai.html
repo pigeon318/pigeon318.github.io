@@ -4,73 +4,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Plane Identifier</title>
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 </head>
 <body>
-  <header>
-    <button class="menu-button" onclick="toggleMenu()" aria-label="Open Menu">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </button>
-    <ul id="menuOptions">
-      <li><a href="index.html">Home</a></li>
-    </ul>
-  </header>
-
-  <main>
-    <section class="ai-section">
-      <h1>AI Plane Identifier</h1>
-      <p>Select or take a picture of a plane to identify it.</p>
-      <input type="file" accept="image/*" id="fileInput">
-      <img id="preview" alt="Image preview" style="display:none; max-width:300px; margin-top:10px;" />
-      <br>
-      <button onclick="runPrediction()" id="submitBtn" disabled>Submit</button>
-      <div id="result" style="margin-top: 20px; font-size: 1.2em;">No prediction yet.</div>
-    </section>
+  <main class="ai-container">
+    <h1>AI Plane Identifier</h1>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <br><br>
+    <img id="preview" style="max-width: 300px; display: none;" />
+    <br><br>
+    <button id="submitBtn">Submit</button>
+    <div id="predictionResult" class="result-box"></div>
   </main>
 
   <script>
     const URL = "https://teachablemachine.withgoogle.com/models/kdYv2Y8pv/";
-    let model;
-    let imageLoaded = false;
+    let model, maxPredictions;
 
+    const preview = document.getElementById("preview");
+    const imageUpload = document.getElementById("imageUpload");
+    const submitBtn = document.getElementById("submitBtn");
+    const resultBox = document.getElementById("predictionResult");
+
+    // Load the model
     async function loadModel() {
       const modelURL = URL + "model.json";
       const metadataURL = URL + "metadata.json";
       model = await tmImage.load(modelURL, metadataURL);
-      console.log("Model loaded.");
+      maxPredictions = model.getTotalClasses();
     }
 
-    document.getElementById("fileInput").addEventListener("change", function(event) {
-      const file = event.target.files[0];
+    // Preview image
+    imageUpload.addEventListener("change", (e) => {
+      const file = e.target.files[0];
       if (!file) return;
 
-      const img = document.getElementById("preview");
-      img.src = URL.createObjectURL(file);
-      img.style.display = "block";
-      imageLoaded = true;
-      document.getElementById("submitBtn").disabled = false;
-      document.getElementById("result").innerText = "Image loaded. Press Submit to analyze.";
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        preview.src = event.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
     });
 
-    async function runPrediction() {
-      if (!imageLoaded) return;
-      const img = document.getElementById("preview");
-      const prediction = await model.predict(img);
+    // On submit, make prediction
+    submitBtn.addEventListener("click", async () => {
+      if (!preview.src || !model) {
+        resultBox.innerHTML = "<p>Please upload an image and wait for model to load.</p>";
+        return;
+      }
+
+      const prediction = await model.predict(preview);
       prediction.sort((a, b) => b.probability - a.probability);
-      const best = prediction[0];
-      document.getElementById("result").innerHTML = 
-        `Prediction: <strong>${best.className}</strong><br>Confidence: <strong>${(best.probability * 100).toFixed(2)}%</strong>`;
-    }
 
-    function toggleMenu() {
-      const menu = document.getElementById("menuOptions");
-      menu.style.display = (menu.style.display === "block") ? "none" : "block";
-    }
+      resultBox.innerHTML = `<h2>Prediction:</h2>
+        <p><strong>${prediction[0].className}</strong> (${(prediction[0].probability * 100).toFixed(2)}%)</p>`;
+    });
 
-    loadModel();
+    // Load model when page loads
+    window.addEventListener("load", loadModel);
   </script>
 </body>
 </html>
